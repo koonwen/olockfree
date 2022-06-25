@@ -1,6 +1,6 @@
 (lang dune 3.1)
 
-(name Olockfree)
+(name olockfree)
 
 (generate_opam_files true)
 
@@ -16,7 +16,7 @@
 (documentation https://github.com/koonwen/Olockfree)
 
 (package
- (name Olockfree)
+ (name olockfree)
  (synopsis "lock free data structure library")
  (description
   "Library interface and implementation for fine grained concurrent data structures")
@@ -24,7 +24,8 @@
   (ocaml-variants
    (>= 5.0.0+trunk))
   domainslib
-  dune)
+  dune
+  alcotest)
  (tags
   ("lock-free" "fine-grain concurrency" "ocaml" "multicore")))
 

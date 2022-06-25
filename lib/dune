@@ -1,2 +1,3 @@
 (library
- (name olockfree))
+ (name olockfree)
+ (libraries base))

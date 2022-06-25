@@ -1,4 +1,11 @@
 (executable
  (public_name olockfree)
  (name main)
- (libraries olockfree))
+ (libraries unix)
+ ; (libraries olockfree)
+ )
+
+(env
+ (dev
+  (flags
+   (:standard -w -26))))
