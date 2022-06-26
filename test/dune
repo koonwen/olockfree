@@ -1,2 +1,3 @@
 (test
- (name olockfree))
+ (name olockfree)
+ (libraries olockfree))

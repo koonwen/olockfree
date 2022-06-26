@@ -16,4 +16,4 @@ val enq : 'a t -> 'a -> unit
 (** [deq q] removes the first element from the queue in FIFO fashion. 
     This queue is likely unsed in a concurrent setting and therefore
     be mindful that only sequential consistency amongst threads are guranteed*)
-val deq : 'a t -> 'a
+val deq : 'a t -> 'a option

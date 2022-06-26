@@ -1,23 +1,36 @@
-module type OrderedType = sig
-  type t
-
-  val compare : t -> t -> int
-end
-
-module Make (Ord : OrderedType) = struct
-  type 'a t = Ord.t list
-
-  let create () = Array.make 10
-  let enq q x = failwith "not implemeted"
-  let deq q = failwith "not implemented"
-end
-
+(* Internal doubly linked list node structure *)
 type 'a dll =
-  | Node of 'a dll * 'a option * 'a dll
-  | Empty
+  | Null
+  | Node of
+      { mutable prev : 'a dll
+      ; payload : 'a
+      ; mutable next : 'a dll
+      }
 
-(* Need to implement a doubly linked list which uses a two terminals *)
+(* Queue uses a head and tail terminal *)
 type 'a t =
-  { s_term : 'a ref
-  ; e_term : 'a ref
+  { mutable hd_term : 'a dll
+  ; mutable tl_term : 'a dll
   }
+
+let create () = { hd_term = Null; tl_term = Null }
+
+let enq q x =
+  match q.tl_term with
+  | Null ->
+    let new_node = Node { prev = Null; payload = x; next = Null } in
+    q.hd_term <- new_node;
+    q.tl_term <- new_node
+  | Node payload as n ->
+    let new_node = Node { prev = n; payload = x; next = Null } in
+    payload.next <- new_node;
+    q.tl_term <- new_node
+;;
+
+let deq q =
+  match q.hd_term with
+  | Null -> None
+  | Node n ->
+    q.hd_term <- n.next;
+    Some n.payload
+;;
