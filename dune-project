@@ -25,10 +25,10 @@
    (>= 5.0.0+trunk))
   domainslib
   dune
-  <!-- (ocamlformat :dev) -->
-  <!-- (ocamlformat-rpc :dev)
-  (ocp-indent :dev)
-  (merlin :dev) -->
+  ; (ocamlformat :dev)
+  ; (ocamlformat-rpc :dev)
+  ; (ocp-indent :dev)
+  ; (merlin :dev)
   (alcotest :with-test))
  (tags
   ("lock-free" "fine-grain concurrency" "ocaml" "multicore")))

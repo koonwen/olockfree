@@ -1,8 +1,7 @@
 (executable
  (public_name olockfree)
  (name main)
- ; (libraries unix)
- (libraries olockfree fmt unix))
+ (libraries olockfree unix fmt))
 
 (env
  (dev

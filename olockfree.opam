@@ -14,14 +14,6 @@ depends: [
   "ocaml-variants" {>= "5.0.0+trunk"}
   "domainslib"
   "dune" {>= "3.1"}
-  "<!--"
-  "ocamlformat" {dev}
-  "-->"
-  "<!--"
-  "ocamlformat-rpc" {dev}
-  "ocp-indent" {dev}
-  "merlin" {dev}
-  "-->"
   "alcotest" {with-test}
   "odoc" {with-doc}
 ]
