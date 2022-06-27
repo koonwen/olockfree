@@ -8,6 +8,7 @@ type 'a dll =
       }
 
 (* Queue uses a head and tail terminal *)
+(* TODO: Add size *)
 type 'a t =
   { mutable hd_term : 'a dll
   ; mutable tl_term : 'a dll

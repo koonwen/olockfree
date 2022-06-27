@@ -1,3 +1,10 @@
-switch :
-	opam switch create . 5.0.0+trunk
-	opam install . --deps-only
+.PHONY:test
+
+run:
+	dune exec -- bin/main.exe
+
+switch: dune-project
+	opam switch create . --deps-only --with-test
+	
+test:
+	dune runtest

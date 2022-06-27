@@ -1,0 +1,52 @@
+opam-version: "2.0"
+name: "olockfree"
+version: "~dev"
+synopsis: "A lock free data structure library"
+description:
+  "Library interface and implementation for fine grained concurrent data structures"
+maintainer: "Lee Koonwen"
+authors: "Lee Koonwen"
+license: "AGPL-3.0-only"
+tags: ["lock-free" "fine-grain concurrency" "ocaml" "multicore"]
+homepage: "https://github.com/koonwen/Olockfree"
+doc: "https://github.com/koonwen/Olockfree"
+bug-reports: "https://github.com/koonwen/Olockfree/issues"
+depends: [
+  "alcotest" {= "1.6.0" & with-test}
+  "astring" {= "0.8.5" & with-test}
+  "base-bigarray" {= "base"}
+  "base-domains" {= "base"}
+  "base-nnp" {= "base"}
+  "base-threads" {= "base"}
+  "base-unix" {= "base"}
+  "cmdliner" {= "1.1.1" & with-test}
+  "domainslib" {= "0.4.2"}
+  "dune" {= "3.3.1"}
+  "fmt" {= "0.9.0" & with-test}
+  "ocaml" {= "5.0.0"}
+  "ocaml-config" {= "3"}
+  "ocaml-syntax-shims" {= "1.0.0" & with-test}
+  "ocaml-variants" {= "5.0.0+trunk"}
+  "ocamlbuild" {= "0.14.1" & with-test}
+  "ocamlfind" {= "1.9.5" & with-test}
+  "re" {= "1.10.4" & with-test}
+  "seq" {= "base" & with-test}
+  "stdlib-shims" {= "0.3.0" & with-test}
+  "topkg" {= "1.0.5" & with-test}
+  "uutf" {= "1.0.3" & with-test}
+]
+build: [
+  ["dune" "subst"] {dev}
+  [
+    "dune"
+    "build"
+    "-p"
+    name
+    "-j"
+    jobs
+    "@install"
+    "@runtest" {with-test}
+    "@doc" {with-doc}
+  ]
+]
+dev-repo: "git+https://github.com/koonwen/Olockfree.git"

@@ -1,3 +1,3 @@
 (test
- (name olockfree)
+ (name test_olockfree)
  (libraries olockfree unix fmt domainslib alcotest))
