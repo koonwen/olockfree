@@ -17,7 +17,7 @@
 
 (package
  (name olockfree)
- (synopsis "lock free data structure library")
+ (synopsis "A lock free data structure library")
  (description
   "Library interface and implementation for fine grained concurrent data structures")
  (depends
@@ -25,7 +25,8 @@
    (>= 5.0.0+trunk))
   domainslib
   dune
-  alcotest)
+  (ocaml-lsp-server :dev)
+  (alcotest :with-test))
  (tags
   ("lock-free" "fine-grain concurrency" "ocaml" "multicore")))
 
