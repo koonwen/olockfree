@@ -2,7 +2,7 @@
  (public_name olockfree)
  (name main)
  ; (libraries unix)
- (libraries olockfree))
+ (libraries olockfree fmt unix))
 
 (env
  (dev
