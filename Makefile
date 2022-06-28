@@ -8,3 +8,6 @@ switch: dune-project
 	
 test:
 	dune runtest
+
+qtest:
+	dune exec -- test/test_olockfree.exe -q

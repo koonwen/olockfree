@@ -1,3 +1,8 @@
 (test
  (name test_olockfree)
  (libraries olockfree unix fmt domainslib alcotest))
+
+(env
+ (dev
+  (flags
+   (:standard -w -26-27-37-32))))
