@@ -1,4 +1,4 @@
-(* Internal doubly linked list node structure *)
+(* Internal doubly linked list node structure
 type 'a dll =
   | Null
   | Node of
@@ -42,4 +42,51 @@ let deq q =
     in
   Mutex.unlock q.mutex;
   res
-;;
+;; *)
+
+type 'a node = 
+| Null
+| Node of {
+  payload : 'a option;
+  mutable next : 'a node
+}
+
+type 'a t = {
+  mutable hd_sentinel: 'a node Atomic.t;
+  mutable tl_sentinel: 'a node Atomic.t;
+  mutable size: int
+}
+
+let create =
+  let dummy_node = Node {payload = None; next = Null} |> Atomic.make in
+  {hd_sentinel = dummy_node; tl_sentinel = dummy_node; size = 0}
+
+let get_next node = function 
+| Node record -> record.next 
+| Null -> failwith "Null variant has no next"
+
+let equal_node n1 n2 =
+  match n1, n2 with
+  | Null, Null -> true
+  | Node r1, Node r2 -> r1 == r2
+  | _ -> false
+
+let enq q payload = 
+  let flag = ref true in
+  while !flag do
+    let new_node = Node {payload = Some payload; next = Null} in
+    let last = q.tl_sentinel |> Atomic.get in
+    let next = get_next last in
+    (* Check if the truly at the tail *)
+    if next = Null then 
+      (* Try to add the new node into the queue *)
+      if Atomic.compare_and_set (get_next last) next new_node then
+        (* Try to update the tail sentinel. No worries if it fails, means some other thread helped out! *)
+        let _ = Atomic.compare_and_set tl_sentinel last new_node in 
+        flag := false;
+      else
+        (* Another thread installed their node first, help them complete the task *)
+        let _ = Atomic.compare_and_set tl_sentinel last next in ();
+  done
+
+let deq q = failwith ""
